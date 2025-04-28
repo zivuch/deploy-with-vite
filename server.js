@@ -1,22 +1,12 @@
-// const express = require("express");
-// const cors = require("cors");
-// const path = require("path");
-
 import express from "express";
-import cors from "cors";
-import path from "path";
+import { join, resolve } from "path";
 
 const app = express();
-app.use(cors());
+const __dirname = resolve()
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`running on port ${process.env.PORT || 3001}`);
-});
+console.log(join(__dirname, "dist", "index.html"));
 
-const __dirname = path.resolve();
+app.use(express.static(join(__dirname, "dist")));
+app.get("*any", (_, res) => res.sendFile(join(__dirname, "dist", "index.html")));
 
-app.use(express.static(path.join(__dirname, "/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./dist", "index.html"));
-});
+app.listen(process.env.PORT || 3001, () => console.log("🚀 Server ready"));
