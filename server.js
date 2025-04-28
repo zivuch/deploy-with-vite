@@ -7,6 +7,6 @@ const __dirname = resolve()
 console.log(join(__dirname, "dist", "index.html"));
 
 app.use(express.static(join(__dirname, "dist")));
-app.get("*", (_, res) => res.sendFile(join(__dirname, "dist", "index.html")));
+app.get("/*any", (_, res) => res.sendFile(join(__dirname, "dist", "index.html")));
 
 app.listen(process.env.PORT || 3001, () => console.log("🚀 Server ready"));
